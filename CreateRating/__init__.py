@@ -17,15 +17,15 @@ def main(req: func.HttpRequest, doc: func.Out[func.Document]) -> func.HttpRespon
 
     # Validations
     if message["rating"] not in range(0, 5):
-       return func.HttpResponse("Rating not in range from 0 .. 5", status_code=400)
+       return func.HttpResponse("This rating not in range from 0 .. 5", status_code=400)
 
     response = requests.get(os.getenv('KeyVaultGetUserUrl') + message["userId"])
     if response.status_code == 400:
-        return func.HttpResponse("User does not exist", status_code=400)
+        return func.HttpResponse("This user does not exist", status_code=400)
 
     response = requests.get(os.getenv('KeyVaultGetProductUrl') + message["productId"])
     if response.status_code == 400:
-        return func.HttpResponse("Product does not exist", status_code=400)
+        return func.HttpResponse("This product does not exist", status_code=400)
 
     item = json.dumps(message)
 
